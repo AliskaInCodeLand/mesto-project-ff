@@ -7,9 +7,16 @@ function createCard(cardItem, clickDeleteCard, clickLikeCard, renderCardPopup) {
     
     const card = container.querySelector('.card').cloneNode(true);
 
-    card.querySelector('.card__image').src = cardItem.link;
-    card.querySelector('.card__image').alt = cardItem.name;
-    card.querySelector('.card__title').textContent = cardItem.name;
+    const cardImage = card.querySelector('.card__image');
+    const cardDescription = card.querySelector('.card__title');
+
+    cardImage.src = cardItem.link;
+    cardImage.alt = cardItem.name;
+    cardDescription.textContent = cardItem.name;
+
+    // card.querySelector('.card__image').src = cardItem.link;
+    // card.querySelector('.card__image').alt = cardItem.name;
+    // card.querySelector('.card__title').textContent = cardItem.name;
 
     const deleteButton = card.querySelector('.card__delete-button');
     deleteButton.addEventListener('click', clickDeleteCard); 

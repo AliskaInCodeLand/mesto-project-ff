@@ -27,21 +27,20 @@ document.addEventListener('click', (evt)=>{
         openModal(popupEdit);
         nameInput.value = elementNameInput.textContent;
         jobInput.value = elementJobInput.textContent;
+
+        return;
     }
     if (evt.target ==  addButton){
         const popupNewCard = document.querySelector('.popup_type_new-card');
         openModal(popupNewCard);
     }
-    for (let closeBtn of closeButtons){
-        if (evt.target == closeBtn){
-            closeModal();
-        }  
+    if (evt.target.classList.contains('popup__close')){
+        const btnDelete = evt.target;
+        closeModal(btnDelete.closest('.popup'));
     } 
 })
 
-
-// Находим форму в DOM
-let formElement = document.querySelectorAll(".popup__form");
+const forms = document.querySelectorAll(".popup__form");
 
 const editProfileForm = document.forms["edit-profile"];
 const nameInput = document.querySelector('.popup__input_type_name');
@@ -51,7 +50,6 @@ const jobInput = document.querySelector('.popup__input_type_description');
 const elementNameInput = document.querySelector(".profile__title");
 const elementJobInput = document.querySelector(".profile__description");
 
-// Находим форму добавления новой карточки в DOM 
 const newPlaceForm = document.forms["new-place"];
 const placeInput = newPlaceForm.elements["place-name"];
 const urlInput = newPlaceForm.elements["link"];
@@ -60,7 +58,7 @@ const urlInput = newPlaceForm.elements["link"];
 function handleFormSubmit(evt) {
 
     evt.preventDefault();
-
+    console.log(`evt.target: ${evt.target.classList}`)
     if(evt.target == editProfileForm){
 
         let nameInputValue = nameInput.value;
@@ -68,6 +66,9 @@ function handleFormSubmit(evt) {
 
         elementNameInput.textContent= nameInputValue;
         elementJobInput.textContent = JobInputValue;
+
+        closeModal(editProfileForm.closest('.popup'));
+        return;
     } 
 
     if(evt.target == newPlaceForm){
@@ -75,24 +76,19 @@ function handleFormSubmit(evt) {
         const newCard = createCard({name: placeInput.value, link: urlInput.value}, clickDeleteCard, clickLikeCard, renderCardPopup);
         listCards.prepend(newCard);
 
-        placeInput.value = "";
-        urlInput.value = "";
+        newPlaceForm.reset();
+        closeModal(newPlaceForm.closest('.popup'));
     } 
-
-    closeModal();
 }
 
+document.addEventListener('submit', handleFormSubmit);
 
-formElement.forEach((form) => {
-    form.addEventListener('submit', handleFormSubmit);
-});
-
-function renderCardPopup( parametrImg, parametr){
+function renderCardPopup( parametrImg, parametrDescription){
     const renderCardimage = document.querySelector('.popup__image');
     renderCardimage['src'] = parametrImg;
 
     const renderCardCaption = document.querySelector('.popup__caption');
-    renderCardCaption.textContent = parametr;
+    renderCardCaption.textContent = parametrDescription;
 
     const popupTypeImage = document.querySelector('.popup_type_image');
     openModal(popupTypeImage);
