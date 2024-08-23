@@ -61,8 +61,8 @@ function handleFormSubmit(evt) {
     console.log(`evt.target: ${evt.target.classList}`)
     if(evt.target == editProfileForm){
 
-        let nameInputValue = nameInput.value;
-        let JobInputValue = jobInput.value;
+        const nameInputValue = nameInput.value;
+        const JobInputValue = jobInput.value;
 
         elementNameInput.textContent= nameInputValue;
         elementJobInput.textContent = JobInputValue;
