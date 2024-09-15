@@ -69,16 +69,16 @@ export const addNewPlace = (place, url) => {
     .then(handleResponse);
 } 
 
-export const deletePlace = (cardId) => {
-    return fetch(`${config.baseUrl}/cards/${cardId}`, {
+export const deletePlace = (card) => {
+    return fetch(`${config.baseUrl}/cards/${card._id}`, {
         method: 'DELETE',
         headers: config.headers,
     })
     .then(handleResponse);
 } 
 
-export const putHandleLike = (myLikeId) => {
-    return fetch(`${config.baseUrl}/cards/likes/${myLikeId}`, {
+export const putHandleLike = (likedCardId) => {
+    return fetch(`${config.baseUrl}/cards/likes/${likedCardId}`, {
         method: 'PUT',
         headers: config.headers,
     })
@@ -86,8 +86,8 @@ export const putHandleLike = (myLikeId) => {
 } 
 
 
-export const putHandleDisLike = (myDisLikeId) => {
-    return fetch(`${config.baseUrl}/cards/likes/${myDisLikeId}`, {
+export const putHandleDisLike = (disLikedCardId) => {
+    return fetch(`${config.baseUrl}/cards/likes/${disLikedCardId}`, {
         method: 'DELETE',
         headers: config.headers,
     })
