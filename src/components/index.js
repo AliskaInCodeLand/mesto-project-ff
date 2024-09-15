@@ -194,9 +194,7 @@ export function clickDeleteCard(deleteButton, card) {
   })
 }
 
-
 export function addLikeCard(card, btn, spanLike){
-  
   putHandleLike(card._id)
   .then((data)=>{
     toggleLike(btn);
@@ -206,7 +204,6 @@ export function addLikeCard(card, btn, spanLike){
   .catch((err) => {
     console.log(err);
   })
-
 }
 
 export function removeLikeCard(card, btn, spanLike){
