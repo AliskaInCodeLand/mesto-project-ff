@@ -4,8 +4,6 @@ import {openModal, closeModal, clickOverlay} from './modal.js';
 import {enableValidation, clearValidation} from './validation.js';
 
 import { getInitialCards, getInitialProfile, getEditProfile, addNewPlace, deletePlace, putHandleLike, putHandleDisLike, getEditAvatar} from './api.js'
-// import { getInitialCards, getInitialProfile, getEditProfile, addNewPlace, deletePlace, getEditAvatar} from './api.js'
-
   // Валидация формы
 
   const validationConfig = {
@@ -64,7 +62,6 @@ Promise.all([getInitialCards(), getInitialProfile()])
     profileId = response2._id;
     elementAvatar.style.backgroundImage=`url(${response2.avatar})`; 
 
-    // const card = createCard(cardItem, clickDeleteCard, addLike, removeLike, renderCardPopup, profileId);
     const card = createCard(cardItem, clickDeleteCard, addLikeCard, removeLikeCard, renderCardPopup, profileId);
     listCards.append(card);
   })
@@ -76,11 +73,7 @@ Promise.all([getInitialCards(), getInitialProfile()])
 
 const editButton = document.querySelector('.profile__edit-button');
 const addButton = document.querySelector('.profile__add-button');
-const closeButtons = document.querySelectorAll('.popup__close');
-
-const countLikes = document.querySelectorAll(".card__like-count");
-const buttonsLike = document.querySelectorAll("card__like-button");
-// 
+const closeButtons = document.querySelectorAll('.popup__close'); 
 
 editButton.addEventListener('click', (evt)=>{
   editProfileForm.reset();
@@ -93,8 +86,6 @@ editButton.addEventListener('click', (evt)=>{
   return
 })
 addButton.addEventListener('click', (evt)=>{
-
-  
   
   openModal(popupNewCard);
   clearValidation(popupNewCard, validationConfig);
@@ -116,95 +107,7 @@ elementAvatar.addEventListener('click', (evt)=>{
   clearValidation(popupAvatar, validationConfig);
 })
 
-// buttonsLike.addEventListener('click', (evt)=>{
-//   if (likeButton.classList.contains('card__like-button_is-active')){
-//     putHandleDisLike(card._id)
-//     .then((data)=>{
-//       card.likes = data.likes;
-//       toggleLike(likeButton)
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//     })
-//   }
-//   else{
-//     putHandleLike(card._id)
-//     .then((data)=>{
-//       card.likes = data.likes;
-//       toggleLike(likeButton)
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//     })
-//   }
-  
-
-// })
-  
-
 enableValidation(validationConfig);
-
-// function handleFormSubmit(evt) {
-//   evt.preventDefault();
-//   if(evt.target == editProfileForm){
-//     editProfileForm.querySelector('.popup__button').textContent = "Сохранение...";
-
-//     getEditProfile(nameInput.value, jobInput.value)
-//     .then((newProfile) => {
-//       elementName.textContent= newProfile.name;
-//       elementJob.textContent = newProfile.about;
-//       editProfileForm.querySelector('.popup__button').textContent = "Сохранить";
-      
-//     })
-//     .then(()=> {
-//       closeModal(editProfileForm.closest('.popup'));
-      
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//     });
-//     return
-//   } 
-
-//   if(evt.target == newAvatarForm){
-//     newAvatarForm.querySelector('.popup__button').textContent = "Сохранение...";
-//     getEditAvatar(avatarInput.value)
-//     .then((newAvatar) => {
-//       elementAvatar.style.backgroundImage=`url("${newAvatar.avatar}")`;
-//       newAvatarForm.querySelector('.popup__button').textContent = "Сохранить";
-//     })
-//     .then(() => {
-//       closeModal(newAvatarForm.closest('.popup'));
-//       newAvatarForm.reset(); 
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//     });
-//     return
-//   } 
-
-//   if(evt.target == newPlaceForm){
-//     newPlaceForm.querySelector('.popup__button').textContent = "Сохранение...";
-//     addNewPlace(placeInput.value, urlInput.value)
-//     .then((newPlace) => {
-//       const newCard = createCard(newPlace, clickDeleteCard, addLike, removeLike, renderCardPopup, profileId);
-//       listCards.prepend(newCard);
-      
-//     })
-//     .then(() => {
-//       newPlaceForm.querySelector('.popup__button').textContent = "Сохранить";
-//       newPlaceForm.reset();
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//     });
-    
-//     closeModal(newPlaceForm.closest('.popup'));
-//   }
-
-// }
-
-// document.addEventListener('submit', handleFormSubmit);
 
 function editProfile(evt) {
   evt.preventDefault();
@@ -273,9 +176,6 @@ document.addEventListener('submit',editProfile);
 document.addEventListener('submit',createAvatar);
 document.addEventListener('submit',createNewPlace);
 
-
-
-
 function renderCardPopup( parametrImg, parametrDescription){
   
   renderCardimage['src'] = parametrImg;
@@ -320,27 +220,3 @@ export function removeLikeCard(card, btn, spanLike){
     console.log(err);
   })
 }
-
-// export function addLike(button, card){
-  
-//   putHandleLike(card._id)
-//   .then((data)=>{
-//     card.likes = data.likes;
-    
-//   })
-//   .catch((err) => {
-//     console.log(err);
-//   })
-// }
-
-// export function removeLike(button, card){
-//   putHandleDisLike(card._id)
-//   .then((data)=>{
-//     card.likes = data.likes;
-//     button.classList.remove('card__like-button_is-active');
-//     button.nextElementSibling.textContent = card.likes.length;
-//   })
-//   .catch((err) => {
-//     console.log(err);
-//   })
-// }
