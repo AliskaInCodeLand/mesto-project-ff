@@ -132,19 +132,19 @@ return inputList.some(function(input) {
 
 // Изменить кликабельность кнопки
 
-const toggleButtonState = function(inputList, button) {
+const toggleButtonState = function(inputList, button, settings) {
 // проверка валидности всех полей ввода
 if (hasInvalidInput(inputList)) {
   // если есть хотя бы 1 невалидное поле
   button.disabled = true;
   // блокировка кнопки
-  button.classList.add('button__inactive');
+  button.classList.add(settings.inactiveButtonClass);
   // добавление класса неактивности кнопки
 } else {
   // иначе 
   button.disabled = false;
   // разблокировать кнопку
-  button.classList.remove('button__inactive');
+  button.classList.remove(settings.inactiveButtonClass);
   // удалить класс неактивности кнопки
 }
 };
@@ -162,7 +162,7 @@ inputList.forEach(function(input) {
     // установка слушателя при наборе каждого нового символа для конкретного инпута
     isValid(form, input, settings);
     // применение к полю ввода, которое сейчас заполняется, функции проверки на валидность
-    toggleButtonState(inputList, button);
+    toggleButtonState(inputList, button, settings);
     // изменение состояния кнопки при записи значений в конкретное поле ввода 
   });
 });
@@ -204,7 +204,7 @@ const clearValidation = function (popup, settings){
     // }
 
   })
-  toggleButtonState(inputList, btn);
+  toggleButtonState(inputList, btn, settings);
   // btn.disabled = false;
   // btn.classList.remove('button__inactive');
 

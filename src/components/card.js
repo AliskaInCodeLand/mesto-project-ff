@@ -55,13 +55,14 @@ function createCard(cardItem, clickDeleteCard, addLikeCard, removeLikeCard, rend
     return card;
 }
 
-function toggleLike(button){
+function toggleLike(button, arrayLikes, spanLike){
     if (button.classList.contains('card__like-button_is-active')){
         button.classList.remove('card__like-button_is-active');
     }
     else{
         button.classList.add('card__like-button_is-active');
     }
+    spanLike.textContent = arrayLikes.length;
 }
 
 export {createCard, toggleLike}
